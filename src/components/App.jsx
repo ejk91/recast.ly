@@ -1,14 +1,27 @@
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      nextVideo: window.exampleVideoData[0]
+    };
+  }
+
+
+  onVideoEntryClick (clickedVideo) {
+    this.setState({
+      nextVideo: clickedVideo
+    });
   }
 
   render () {
+    let clickedVideo = this.state.nextVideo;
+    { console.log('App', clickedVideo); }
+
     return (
       <div>
         <Nav />
         <div className="col-md-7">
-          <VideoPlayer video={exampleVideoData[0]}/>
+          <VideoPlayer video={clickedVideo}/>
         </div>
         <div className="col-md-5">
           <VideoList videos={exampleVideoData}/>
