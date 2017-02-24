@@ -14,17 +14,16 @@ class App extends React.Component {
   }
 
   render () {
-    let clickedVideo = this.state.nextVideo;
-    { console.log('App', clickedVideo); }
+
 
     return (
       <div>
         <Nav />
         <div className="col-md-7">
-          <VideoPlayer video={clickedVideo}/>
+          <VideoPlayer video={this.state.nextVideo}/>
         </div>
         <div className="col-md-5">
-          <VideoList videos={exampleVideoData}/>
+          <VideoList videos={props.results} click={this.onVideoEntryClick.bind(this)}/>
         </div>
       </div>
     );
