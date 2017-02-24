@@ -14,6 +14,10 @@ class App extends React.Component {
     });
   }
 
+  componentDidMount() {
+    this.searchYouTubeVideos('corgi');
+  }
+
   searchYouTubeVideos (query) {
     let options = {
       key: this.props.API_KEY,
