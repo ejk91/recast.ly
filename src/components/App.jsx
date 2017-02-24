@@ -2,6 +2,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      videoList: window.exampleVideoData,
       nextVideo: window.exampleVideoData[0]
     };
   }
@@ -13,17 +14,34 @@ class App extends React.Component {
     });
   }
 
+  searchYouTubeVideos (query) {
+    let options = {
+      key: this.props.API_KEY,
+      query: query
+    };
+    { console.log('search youtube function', this.props.searchYouTube); }
+
+    this.props.searchYouTube(options, (videos) => {
+      this.setState({
+        videoList: videos,
+        nextVideo: videos[0]
+      });
+    });
+  }
+
   render () {
 
 
     return (
       <div>
-        <Nav />
+        <Nav 
+        searchInput= {_.debounce(this.searchYouTubeVideos.bind(this), 1000)}
+        />
         <div className="col-md-7">
           <VideoPlayer video={this.state.nextVideo}/>
         </div>
         <div className="col-md-5">
-          <VideoList videos={props.results} click={this.onVideoEntryClick.bind(this)}/>
+          <VideoList videos={this.state.videoList} click={this.onVideoEntryClick.bind(this)}/>
         </div>
       </div>
     );
